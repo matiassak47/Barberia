@@ -3,7 +3,8 @@ import styles from './Booking.module.css'
 import { supabase } from '../../lib/supabase'
 import { FiCalendar, FiClock, FiUser, FiPhone, FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-const STEPS = ['Servicio', 'Barbero', 'Fecha & Hora', 'Datos', 'Confirmación']
+// 1. Quitamos 'Barbero' de la barra de pasos
+const STEPS = ['Servicio', 'Fecha & Hora', 'Datos', 'Confirmación']
 
 const HOURS = ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30',
   '13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30',
@@ -24,11 +25,15 @@ const DAYS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']
 export default function Booking() {
   const [step, setStep] = useState(0)
   const [services, setServices] = useState([])
-  const [barbers, setBarbers] = useState([])
   const [takenSlots, setTakenSlots] = useState([])
   const [form, setForm] = useState({
-    service: null, barber: null, date: null, time: null,
-    name: '', phone: '', email: '', notes: ''
+    service: null, 
+    date: null, 
+    time: null,
+    name: '', 
+    phone: '', 
+    email: '', 
+    notes: ''
   })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -39,21 +44,20 @@ export default function Booking() {
 
   useEffect(() => {
     supabase.from('services').select('*').then(({ data }) => data && setServices(data))
-    supabase.from('barbers').select('*').eq('active', true).then(({ data }) => data && setBarbers(data))
   }, [])
 
+  // Modificado para traer los turnos ocupados sin depender de un barbero específico
   useEffect(() => {
-    if (form.barber && form.date) {
+    if (form.date) {
       supabase.from('appointments')
         .select('appointment_time')
-        .eq('barber_id', form.barber.id)
         .eq('appointment_date', form.date)
         .neq('status', 'cancelled')
         .then(({ data }) => {
           if (data) setTakenSlots(data.map(a => a.appointment_time.slice(0,5)))
         })
     }
-  }, [form.barber, form.date])
+  }, [form.date])
 
   const select = (field, value) => setForm(f => ({ ...f, [field]: value }))
 
@@ -65,7 +69,7 @@ export default function Booking() {
         client_name: form.name,
         client_phone: form.phone,
         client_email: form.email || null,
-        barber_id: form.barber.id,
+        barber_id: 1, // 👈 Le asignamos la ID 1 por defecto para no romper restricciones de Supabase
         service_id: form.service.id,
         appointment_date: form.date,
         appointment_time: form.time,
@@ -74,7 +78,7 @@ export default function Booking() {
       })
       if (err) throw err
       setSuccess(true)
-      setStep(4)
+      setStep(3) // Salta al último paso (Confirmación)
     } catch (e) {
       setError('Error al reservar. Intenta de nuevo.')
     } finally {
@@ -83,7 +87,7 @@ export default function Booking() {
   }
 
   const reset = () => {
-    setForm({ service: null, barber: null, date: null, time: null, name: '', phone: '', email: '', notes: '' })
+    setForm({ service: null, date: null, time: null, name: '', phone: '', email: '', notes: '' })
     setStep(0)
     setSuccess(false)
     setError('')
@@ -130,9 +134,8 @@ export default function Booking() {
 
   const canNext = () => {
     if (step === 0) return !!form.service
-    if (step === 1) return !!form.barber
-    if (step === 2) return !!form.date && !!form.time
-    if (step === 3) return form.name.trim() && form.phone.trim()
+    if (step === 1) return !!form.date && !!form.time
+    if (step === 2) return form.name.trim() && form.phone.trim()
     return true
   }
 
@@ -146,7 +149,7 @@ export default function Booking() {
             <div className={styles.line}></div>
           </div>
           <h2 className={styles.title}>Reservá tu<br /><em>turno</em></h2>
-          <p className={styles.subtitle}>Elegí el servicio, el barbero y el horario que más te convenga.</p>
+          <p className={styles.subtitle}>Elegí el servicio y el horario que más te convenga.</p>
         </div>
 
         {!success && (
@@ -186,30 +189,8 @@ export default function Booking() {
             </div>
           )}
 
-          {/* STEP 1 — Barbero */}
+          {/* STEP 1 — Fecha & Hora */}
           {step === 1 && (
-            <div className={styles.stepContent}>
-              <h3 className={styles.stepTitle}>¿Con quién querés atenderte?</h3>
-              <div className={styles.barberGrid}>
-                {barbers.map(b => (
-                  <div
-                    key={b.id}
-                    className={`${styles.barberCard} ${form.barber?.id === b.id ? styles.selected : ''}`}
-                    onClick={() => select('barber', b)}
-                  >
-                    <div className={styles.barberAvatar}>
-                      {b.name.charAt(0)}
-                    </div>
-                    <div className={styles.barberName}>{b.name}</div>
-                    {b.bio && <p className={styles.barberBio}>{b.bio.slice(0, 80)}...</p>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 2 — Fecha & Hora */}
-          {step === 2 && (
             <div className={styles.stepContent}>
               <h3 className={styles.stepTitle}>Elegí fecha y horario</h3>
               <div className={styles.dateTimeGrid}>
@@ -263,16 +244,13 @@ export default function Booking() {
             </div>
           )}
 
-          {/* STEP 3 — Datos personales */}
-          {step === 3 && (
+          {/* STEP 2 — Datos personales */}
+          {step === 2 && (
             <div className={styles.stepContent}>
               <h3 className={styles.stepTitle}>Tus datos</h3>
               <div className={styles.summary}>
                 <div className={styles.summaryItem}>
                   <span>Servicio:</span><strong>{form.service?.name}</strong>
-                </div>
-                <div className={styles.summaryItem}>
-                  <span>Barbero:</span><strong>{form.barber?.name}</strong>
                 </div>
                 <div className={styles.summaryItem}>
                   <span>Fecha:</span><strong>{formatDate(form.date)} a las {form.time}</strong>
@@ -319,7 +297,7 @@ export default function Booking() {
                   </div>
                 </div>
                 <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
-                  <label>Notas adicionales</label>
+                  <label>Notes adicionales</label>
                   <textarea
                     placeholder="¿Algo que debamos saber? (opcional)"
                     value={form.notes}
@@ -332,8 +310,8 @@ export default function Booking() {
             </div>
           )}
 
-          {/* STEP 4 — Confirmación */}
-          {step === 4 && success && (
+          {/* STEP 3 — Confirmación */}
+          {step === 3 && success && (
             <div className={styles.successScreen}>
               <div className={styles.successIcon}><FiCheck size={40} /></div>
               <h3>¡Turno reservado!</h3>
@@ -341,7 +319,6 @@ export default function Booking() {
               <div className={styles.successDetails}>
                 <div><span>Cliente</span><strong>{form.name}</strong></div>
                 <div><span>Servicio</span><strong>{form.service?.name}</strong></div>
-                <div><span>Barbero</span><strong>{form.barber?.name}</strong></div>
                 <div><span>Fecha</span><strong>{formatDate(form.date)} — {form.time} hs</strong></div>
               </div>
               <button className={styles.resetBtn} onClick={reset}>Reservar otro turno</button>
@@ -356,7 +333,7 @@ export default function Booking() {
                   <FiChevronLeft /> Atrás
                 </button>
               )}
-              {step < 3 ? (
+              {step < 2 ? (
                 <button
                   className={styles.nextBtn}
                   disabled={!canNext()}
@@ -379,4 +356,4 @@ export default function Booking() {
       </div>
     </section>
   )
-}
+} 
