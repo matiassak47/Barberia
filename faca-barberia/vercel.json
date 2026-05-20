@@ -1,0 +1,12 @@
+{
+      "rewrites": [
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
+    }
+    ```
+  
+  
+    Guarda el archivo, haz un commit y súbelo a tu repositorio de GitHub (o la plataforma que uses):
