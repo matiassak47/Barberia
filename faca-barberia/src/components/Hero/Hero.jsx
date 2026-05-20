@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import styles from './Hero.module.css'
 import { FiScissors, FiCalendar, FiMapPin } from 'react-icons/fi'
 
+// IMPORT DEL LOGO (Guarda tu imagen en la carpeta src/assets/ como logo.png)
+import logoBarberia from '../../assets/logo.png'
+
 export default function Hero() {
   const ref = useRef(null)
 
@@ -30,11 +33,20 @@ export default function Hero() {
           <span>BARBERÍA CLÁSICA</span>
         </div>
 
-        <h1 className={styles.title}>
-          <span className={styles.titleSmall}>La barbería</span>
-          <span className={styles.titleBig}>FACA</span>
-          <span className={styles.titleItalic}>de confianza</span>
-        </h1>
+        {/* CONTENEDOR NUEVO: Agrupa el título y el logo uno al lado del otro */}
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>
+            <span className={styles.titleSmall}>La barbería</span>
+            <span className={styles.titleBig}>FACA</span>
+            <span className={styles.titleItalic}>de confianza</span>
+          </h1>
+          
+          {/* Si subiste la imagen a src/assets/, usa la variable {logoBarberia}.
+            Si la subiste a la carpeta public/, borra el import de arriba y cambia 
+            el src a: src="/logo.png" 
+          */}
+          <img src={logoBarberia} alt="Logo Faca" className={styles.heroLogo} />
+        </div>
 
         <p className={styles.subtitle}>
           Cortes que definen carácter. Artes del barbero<br />
