@@ -1,15 +1,30 @@
 import React from 'react'
 import styles from './Services.module.css'
 import { FiScissors, FiClock, FiDollarSign } from 'react-icons/fi'
-import { GiRazor, GiComb, GiBarbedWire } from 'react-icons/gi'
+import { GiRazor, GiPaintBrush, GiBarbedWire } from 'react-icons/gi'
 
-const services = [
-  { icon: <FiScissors />, name: 'Corte Clásico', desc: 'Corte tradicional con tijera y máquina. El estilo que nunca falla.', time: '30 min', price: '$3.500' },
-  { icon: <GiRazor />, name: 'Corte + Barba', desc: 'Corte completo más arreglo y perfilado de barba con navaja.', time: '50 min', price: '$5.500' },
-  { icon: <GiComb />, name: 'Afeitado Clásico', desc: 'Afeitado ritual con navaja, espuma artesanal y toalla caliente.', time: '30 min', price: '$3.000' },
-  { icon: <FiScissors />, name: 'Degradé', desc: 'Corte degradé moderno con delineado y acabado perfecto.', time: '45 min', price: '$4.500' },
-  { icon: <GiComb />, name: 'Keratina Capilar', desc: 'Tratamiento de keratina para alisar y fortalecer el cabello.', time: '60 min', price: '$7.000' },
-  { icon: <GiBarbedWire />, name: 'Diseño de Cejas', desc: 'Perfilado y diseño de cejas para un look completo y definido.', time: '20 min', price: '$1.500' },
+  const services = [
+  { 
+    icon: <FiScissors />, 
+    name: 'Corte Clásico', 
+    desc: 'Corte tradicional con tijera y máquina. El estilo que nunca falla.', 
+    time: '30 min', 
+    price: '$3.500' 
+  },
+  { 
+    icon: <GiRazor />, 
+    name: 'Corte + Barba', 
+    desc: 'Corte completo más arreglo y perfilado de barba con navaja.', 
+    time: '50 min', 
+    price: '$5.500' 
+  },
+  { 
+    icon: <GiPaintBrush />, // <-- Cambiado por el pincel
+    name: 'Teñido', 
+    desc: 'Coloración profesional para el cabello o barba con productos premium.', // <-- Descripción corregida
+    time: '30 min', 
+    price: '$3.000' 
+  },
 ]
 
 export default function Services() {

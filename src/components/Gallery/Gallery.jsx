@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styles from './Gallery.module.css'
+import img1 from '../../assets/galeria/img1.png'
 
 const images = [
-  { url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80', label: 'Corte Clásico' },
+  { url: img1, label: 'Corte Clásico' },
   { url: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80', label: 'Degradé' },
   { url: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80', label: 'Barba' },
   { url: 'https://images.unsplash.com/photo-1593702288056-7cc32a0ff6d5?w=600&q=80', label: 'Afeitado' },
