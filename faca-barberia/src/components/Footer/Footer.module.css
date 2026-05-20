@@ -1,0 +1,122 @@
+.footer {
+  background: var(--dark-2);
+  border-top: 1px solid rgba(168,123,5,0.15);
+}
+
+.top {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+}
+
+.brand {}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.logo svg {
+  transform: rotate(-45deg);
+  font-size: 1.1rem;
+}
+
+.brand p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.social a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(168,123,5,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.social a:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.col h4 {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.col a,
+.col span {
+  font-size: 0.87rem;
+  color: var(--gray);
+  transition: color var(--transition);
+  line-height: 1.4;
+}
+
+.col a:hover { color: var(--white); }
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gray);
+  font-size: 0.87rem;
+  margin-top: 8px;
+}
+
+.bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 24px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--font-condensed);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 1024px) {
+  .top { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+
+@media (max-width: 600px) {
+  .top { grid-template-columns: 1fr; padding: 60px 24px 40px; }
+  .bottom { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+}

@@ -1,0 +1,179 @@
+.section {
+  padding: 120px 0;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: 'SERVICIOS';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 18vw;
+  font-weight: 900;
+  color: rgba(168,123,5,0.03);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrow span {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.line {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.title em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.subtitle {
+  color: var(--gray);
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.card {
+  background: var(--dark-2);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+  transform-origin: left;
+}
+
+.card:hover {
+  background: var(--dark-3);
+  transform: translateY(-4px);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.cardIcon {
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.cardNumber {
+  position: absolute;
+  top: 32px;
+  right: 28px;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(168,123,5,0.07);
+  line-height: 1;
+}
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.cardDesc {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.cardMeta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--gray);
+  font-family: var(--font-condensed);
+  letter-spacing: 0.05em;
+}
+
+.price {
+  color: var(--gold) !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .container { padding: 0 24px; }
+}

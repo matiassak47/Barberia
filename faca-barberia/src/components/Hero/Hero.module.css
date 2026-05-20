@@ -1,0 +1,291 @@
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(135deg, #0a0a0a 0%, #111111 40%, #1a1205 100%);
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(168,123,5,0.08) 0%, transparent 60%);
+}
+
+.diagonalLine {
+  position: absolute;
+  top: -100px;
+  right: 15%;
+  width: 1px;
+  height: 200vh;
+  background: linear-gradient(to bottom, transparent, rgba(168,123,5,0.15), transparent);
+  transform: rotate(15deg);
+}
+
+.diagonalLine2 {
+  position: absolute;
+  top: -100px;
+  right: 25%;
+  width: 1px;
+  height: 200vh;
+  background: linear-gradient(to bottom, transparent, rgba(168,123,5,0.07), transparent);
+  transform: rotate(15deg);
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 140px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168,123,5,0.1);
+  border: 1px solid rgba(168,123,5,0.3);
+  color: var(--gold);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-family: var(--font-condensed);
+  letter-spacing: 0.1em;
+  margin-bottom: 32px;
+  animation: fadeInDown 0.6s ease both;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  animation: fadeInLeft 0.6s ease 0.2s both;
+}
+
+.tagline span {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.taglineLine {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28px;
+  line-height: 1;
+}
+
+.titleSmall {
+  font-family: var(--font-condensed);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--gray);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeInLeft 0.6s ease 0.3s both;
+}
+
+.titleBig {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 80px rgba(168,123,5,0.3);
+  animation: fadeInLeft 0.6s ease 0.4s both;
+}
+
+.titleItalic {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  animation: fadeInLeft 0.6s ease 0.5s both;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 48px;
+  animation: fadeInLeft 0.6s ease 0.6s both;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+  animation: fadeInLeft 0.6s ease 0.7s both;
+}
+
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 16px 36px;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+.primaryBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(168,123,5,0.4);
+}
+
+.secondaryBtn {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(245,240,232,0.3);
+  padding: 16px 36px;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+.secondaryBtn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: fadeIn 0.8s ease 0.9s both;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.05em;
+}
+
+.statDivider {
+  width: 1px;
+  height: 50px;
+  background: rgba(168,123,5,0.25);
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  animation: fadeIn 1s ease 1.2s both;
+}
+
+.scrollIndicator span {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.mouse {
+  width: 22px;
+  height: 34px;
+  border: 1px solid var(--gray);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scroll 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 120px 24px 60px; }
+  .stats { gap: 20px; }
+  .statNum { font-size: 2rem; }
+}

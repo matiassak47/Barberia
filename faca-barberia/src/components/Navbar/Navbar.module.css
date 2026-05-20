@@ -1,0 +1,142 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all var(--transition);
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(168, 123, 5, 0.2);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.logoIcon {
+  color: var(--gold);
+  transform: rotate(-45deg);
+  font-size: 1.3rem;
+}
+
+.logoBarberia {
+  font-family: var(--font-condensed);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.3em;
+  margin-left: -4px;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.links a {
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  transition: color var(--transition);
+  position: relative;
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width var(--transition);
+}
+
+.links a:hover {
+  color: var(--gold);
+}
+
+.links a:hover::after {
+  width: 100%;
+}
+
+.ctaBtn {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+  padding: 10px 22px !important;
+  border-radius: 2px;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  transition: all var(--transition) !important;
+}
+
+.ctaBtn::after {
+  display: none !important;
+}
+
+.ctaBtn:hover {
+  background: var(--gold-light) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  padding: 4px;
+}
+
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+
+  .links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    background: var(--dark);
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: 40px;
+    border-left: 1px solid rgba(168,123,5,0.2);
+    transition: right var(--transition-slow);
+  }
+
+  .links.open { right: 0; }
+
+  .links a { font-size: 1.1rem; }
+}
